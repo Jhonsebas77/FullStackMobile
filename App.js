@@ -9,8 +9,10 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,Button
 } from 'react-native';
+import api from './utilities/API';
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -20,18 +22,41 @@ const instructions = Platform.select({
 });
 
 export default class App extends Component<{}> {
+  constructor(props){
+    super(props);
+    this.state={
+      rovers:[],
+      roverName:''
+    }
+  }
+
+  componentWillMount(){
+   api.getRovers().then((res)=>{
+     this.setState({
+       rovers:res.rovers,
+       roverName:res.rovers[0].name,
+     })
+   });
+  }
+
   render() {
     return (
       <View style={styles.container}>
+        <Button
+          onPress={() => navigation.navigate('Details')}
+          title="Recargar"
+        />
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          Rovers!!!
         </Text>
         <Text style={styles.instructions}>
-          To get started, edit App.js
+          Rovers: {this.state.roverName}
         </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+        <View>
+          {this.state.rovers.map((rovers,i)=> {
+  	         return <Text key={i}>{rovers.name} - {rovers.status} - {rovers.cameras[i].name}</Text>
+        	})}
+        </View>
       </View>
     );
   }
