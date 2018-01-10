@@ -15,17 +15,15 @@ export default class HomeScreen extends React.Component<{}> {
     super(props);
     this.state={
       hotels:[],
+      hotelsSearch:[],
       loaded:false,
+      text:'',
+      noData:false,
     }
-    console.log(this.props);
   }
   async componentWillMount(){
-    console.log(this.props);
     let hotels = await api();
-    this.setState({hotels});
-    this.setState({
-      loaded:true,
-    });
+    this.setState({hotels,loaded:true,hotelsSearch:hotels});
     console.log(hotels);
   }
   renderLoadingView(){
@@ -43,6 +41,52 @@ export default class HomeScreen extends React.Component<{}> {
     )
   }
 
+  filterSearch(text){
+
+    const newData = this.state.hotelsSearch.filter(function (item){
+      const itemData = item.name.toUpperCase()
+      const textData= text.toUpperCase()
+      console.log( itemData.indexOf(textData))
+      return itemData.indexOf(textData) > -1
+    })
+
+ // if no match and text is empty
+      if (!text || text === '') {
+          this.setState({
+          hotelsSearch:this.state.hotels,
+          text:''
+          })
+          console.log("Inicial hotelsSearch: "+this.state.hotelsSearch)
+          console.log("Inicial: "+this.state.hotels)
+        }
+         // if no name matches to text output
+         else if (!Array.isArray(newData) && !newData.length) {
+          // set no data flag to true so as to render flatlist conditionally
+          this.setState({
+            hotelsSearch:this.state.hotels,
+            noData: true
+          })
+          console.log("Intermedio: "+this.state.hotels)
+        }
+// if name matches then display
+        else if (Array.isArray(newData)) {
+          this.setState({
+            noData: false,
+            hotelsSearch:newData,
+            text:text
+          })
+        }
+    console.log("Despues hotelsSearch: "+this.state.hotelsSearch)
+    console.log("Despues: "+this.state.hotels)
+  }
+
+  getDataAgain(){
+    console.log("Hola Mundo")
+    let hotels = api();
+    this.setState({hotels});
+    console.log("Adios Mundo")
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     if (!this.state.loaded) {
@@ -52,18 +96,24 @@ export default class HomeScreen extends React.Component<{}> {
       <ScrollView style={styles.container}>
         <Banner/>
         <SearchBar
+          round
           reverse
           icon={{name: 'search', color: 'white'}}
-          placeholder='¿Conoces el nombre del Hotel ?' />
+          placeholder='¿Conoces el nombre del Hotel ?'
+          onChangeText= {(text)=>this.filterSearch(text)}
+          onClearText=  {()=>this.getDataAgain()}
+          value={this.state.text}
+         />
           <View style={styles.contentContainer}>
             <View style={styles.col1}>
+
+{this.props.noData ? <Text>Sin Datos</Text> :
               <FlatList
-                data={this.state.hotels}
+                data={this.state.hotelsSearch}
                 keyExtractor={(x,i)=>i}
                 renderItem={
                   ({item})=>
                     <TouchableOpacity style={{padding:5}} title="Hoteles"
-                      // onPress={() => this.onHotelPressed(item)}
                       onPress={() => navigate('HotelDetail', {item})}
                       >
                       <ItemHotel
@@ -76,7 +126,7 @@ export default class HomeScreen extends React.Component<{}> {
                       />
                     </TouchableOpacity>
                 }
-              />
+              />}
             </View>
           </View>
       </ScrollView>
