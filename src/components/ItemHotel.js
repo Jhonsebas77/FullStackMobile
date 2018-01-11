@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet,ImageBackground,Text,View,TouchableOpacity,Image} from 'react-native';
-import ImageOverlay from './ImageOverlay';
-import { Tile,Avatar,PricingCard,Rating,Card } from 'react-native-elements';
+import { Rating,Card } from 'react-native-elements';
 
 export default class ItemHotel extends React.Component<{}> {
 

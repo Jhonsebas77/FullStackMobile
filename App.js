@@ -11,7 +11,6 @@ const HomeScreenMain = StackNavigator({
 export default class App extends React.Component<{}> {
   constructor(props){
     super(props);
-    console.log(this.props)
   }
   render() {
     return ( <HomeScreenMain/> );

@@ -1,24 +1,42 @@
 import React, { Component } from 'react';
-import {StyleSheet,ImageBackground,} from 'react-native';
+import {StyleSheet,ImageBackground,View,Image} from 'react-native';
 import ImageOverlay from './ImageOverlay';
 
 export default class Banner extends React.Component<{}> {
   render() {
     return (
-        <ImageBackground source= {require('../img/Landscape.jpg')}
-                style={styles.banner} >
-          <ImageOverlay header='! BUSCA TU HOTEL!' paragraph= 'AQUI!' />
-        </ImageBackground>
+      <View style = {styles.container}>
+        <ImageBackground source= {require('../img/Landscape.jpg')} style={styles.landscape} >
+          <View style = {styles.iconContainer}>
+            <Image source= {require('../img/Logo.png')} style = {styles.icon} />
+          </View>
+          <View>
+              <ImageOverlay header='! BUSCA TU HOTEL !' paragraph= '' />
+          </View>
+          </ImageBackground>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  banner: {
-    width:'100%',
+  container: {
+    flex:1,
+  },
+  landscape:{
+    padding:5,
     alignItems:'center',
-    justifyContent:'center',
-    height:250,
+    backgroundColor:'#98d2c1'
+  },
+  iconContainer:{
+
+  },
+  icon:{
+    width:140,
+    height:140,
+    borderRadius:100,
+    borderWidth:4,
+    borderColor:'#fff',
   },
 
 });

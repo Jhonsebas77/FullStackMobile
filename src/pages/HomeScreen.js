@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import {ScrollView,StyleSheet,View,Text,ImageBackground,TouchableOpacity,Image,FlatList} from 'react-native';
+import {ScrollView,StyleSheet,View,ActivityIndicator,Text,ImageBackground,TouchableOpacity,Image,FlatList} from 'react-native';
 import { SearchBar,Card,Header } from 'react-native-elements';
 import Banner from '../components/Banner';
-import Footer from '../components/Footer';
 import Hotel from './Hotel';
 import ItemHotel from '../components/ItemHotel';
+import Loading from '../components/Loading';
 import {api,apiDetalle} from '../../utilities/API';
 
 export default class HomeScreen extends React.Component<{}> {
@@ -28,16 +28,7 @@ export default class HomeScreen extends React.Component<{}> {
   }
   renderLoadingView(){
     return(
-      <View>
-        <Banner/>
-        <SearchBar
-          reverse
-          icon={{name: 'search', color: 'white'}}
-          placeholder='Cargando...' />
-        <Text style={{fontSize:30}}>
-          Cargando...
-        </Text>
-      </View>
+      <Loading imageLoading= {require('../img/loadHotels.png')} />
     )
   }
 
@@ -50,41 +41,29 @@ export default class HomeScreen extends React.Component<{}> {
       return itemData.indexOf(textData) > -1
     })
 
- // if no match and text is empty
-      if (!text || text === '') {
-          this.setState({
+    // if no match and text is empty
+    if (!text || text === '') {
+        this.setState({
           hotelsSearch:this.state.hotels,
           text:''
-          })
-          console.log("Inicial hotelsSearch: "+this.state.hotelsSearch)
-          console.log("Inicial: "+this.state.hotels)
-        }
-         // if no name matches to text output
-         else if (!Array.isArray(newData) && !newData.length) {
-          // set no data flag to true so as to render flatlist conditionally
-          this.setState({
-            hotelsSearch:this.state.hotels,
-            noData: true
-          })
-          console.log("Intermedio: "+this.state.hotels)
-        }
-// if name matches then display
-        else if (Array.isArray(newData)) {
-          this.setState({
-            noData: false,
-            hotelsSearch:newData,
-            text:text
-          })
-        }
-    console.log("Despues hotelsSearch: "+this.state.hotelsSearch)
-    console.log("Despues: "+this.state.hotels)
-  }
-
-  getDataAgain(){
-    console.log("Hola Mundo")
-    let hotels = api();
-    this.setState({hotels});
-    console.log("Adios Mundo")
+        })
+      }
+       // if no name matches to text output
+       else if (!Array.isArray(newData) && !newData.length) {
+        // set no data flag to true so as to render flatlist conditionally
+        this.setState({
+          hotelsSearch:this.state.hotels,
+          noData: true
+        })
+      }
+      // if name matches then display
+      else if (Array.isArray(newData)) {
+        this.setState({
+          noData: false,
+          hotelsSearch:newData,
+          text:text
+        })
+      }
   }
 
   render() {
@@ -97,25 +76,22 @@ export default class HomeScreen extends React.Component<{}> {
         <Banner/>
         <SearchBar
           round
-          reverse
           icon={{name: 'search', color: 'white'}}
-          placeholder='¿Conoces el nombre del Hotel ?'
+          placeholder=' ¿Conoces el nombre del Hotel?'
           onChangeText= {(text)=>this.filterSearch(text)}
-          onClearText=  {()=>this.getDataAgain()}
           value={this.state.text}
          />
-          <View style={styles.contentContainer}>
-            <View style={styles.col1}>
-
-{this.props.noData ? <Text>Sin Datos</Text> :
-              <FlatList
-                data={this.state.hotelsSearch}
-                keyExtractor={(x,i)=>i}
-                renderItem={
-                  ({item})=>
-                    <TouchableOpacity style={{padding:5}} title="Hoteles"
-                      onPress={() => navigate('HotelDetail', {item})}
-                      >
+        <View style={styles.contentContainer}>
+          <View style={styles.col1}>
+            <FlatList
+              data={this.state.hotelsSearch}
+              keyExtractor={(x,i)=>i}
+              renderItem={
+                ({item})=>
+                  <TouchableOpacity
+                    style={{padding:5}}
+                    title="Hoteles"
+                    onPress={() => navigate('HotelDetail', {item})}>
                       <ItemHotel
                         imageHotel={{uri: item.images}}
                         nombreHotel={item.name}
@@ -124,11 +100,11 @@ export default class HomeScreen extends React.Component<{}> {
                         stars= {item.stars}
                         price={item.price}
                       />
-                    </TouchableOpacity>
-                }
-              />}
-            </View>
+                  </TouchableOpacity>
+              }
+            />
           </View>
+        </View>
       </ScrollView>
     );
   }

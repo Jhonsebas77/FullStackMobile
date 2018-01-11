@@ -1,7 +1,7 @@
 package com.fullstackmobile;
 
 import android.app.Application;
-
+import com.airbnb.android.react.maps.MapsPackage;
 import com.facebook.react.ReactApplication;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -21,12 +21,12 @@ public class MainApplication extends Application implements ReactApplication {
     }
 
     @Override
-    protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new VectorIconsPackage()
-      );
-    }
+       protected List<ReactPackage> getPackages() {
+           return Arrays.<ReactPackage>asList(
+                   new MainReactPackage(),
+                   new MapsPackage()
+           );
+       }
 
     @Override
     protected String getJSMainModuleName() {
@@ -44,4 +44,6 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
   }
+
+
 }

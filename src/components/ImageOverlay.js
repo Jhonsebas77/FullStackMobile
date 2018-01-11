@@ -25,7 +25,6 @@ export default class ImageOverlay extends React.Component<{}> {
   return (
       <View>
         {header}
-        {paragraph}
       </View>
     );
   }

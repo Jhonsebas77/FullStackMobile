@@ -4,8 +4,10 @@ var express = require("express"),
     methodOverride = require("method-override");
     mongoose = require('mongoose');
 var router = express.Router();
-var HotelsCtrl = require('./controllers/hotels');
-
+var HotelsCtrl = require('./controllers/CrlHotels');
+/*
+  Conexion a MongoDB por medio del servicio MongoLab
+*/
 mongoose.connect('mongodb://sebastian:12345@ds245287.mlab.com:45287/fullstackmobile', function(err, res) {
   if(err) {
     console.log('ERROR: connecting to Database. ' + err);
@@ -15,11 +17,10 @@ mongoose.connect('mongodb://sebastian:12345@ds245287.mlab.com:45287/fullstackmob
   });
 });
 
-app.use(bodyParser.json({limit: '10mb'})); 
+app.use(bodyParser.json({limit: '10mb'}));
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 app.use(methodOverride());
 
-// API routes
 var hotels = express.Router();
 
 hotels.route('/hotels')

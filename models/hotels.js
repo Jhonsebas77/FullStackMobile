@@ -5,16 +5,16 @@ const hotelsSchema = new Schema({
   name:   { type: String },
   stars:  { type: Number },
   images: { type: String },
+  imageMaps:{type:String},
   price:  { type: Number },
   address:{ type: String },
-  number: { type: String },
   description:{ type: String },
   city: { type: String },
   country:{ type: String },
-  wifi:{type:Boolean},
-  bed:{type:String},
-  room:{type:String},
-  people:{type:String}
+  wifi:{type:String},
+  television:{type:String},
+  bed:{type:Number},
+  people:{type:Number}
 });
 
 module.exports = mongoose.model('hotels', hotelsSchema);
