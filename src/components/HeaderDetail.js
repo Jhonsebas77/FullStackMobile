@@ -76,10 +76,9 @@ const styles = StyleSheet.create({
     flex:2,
     backgroundColor:'#50B19B',
     flexDirection:'column',
-    flexWrap:'wrap',
-    justifyContent:'space-around',
+    justifyContent:'flex-start',
     alignItems:'flex-start',
-    padding:10,
+    padding:30,
   },
   textDirection: {
     fontWeight:'bold',

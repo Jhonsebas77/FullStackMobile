@@ -75,6 +75,7 @@ export default class HomeScreen extends React.Component<{}> {
       <ScrollView style={styles.container}>
         <Banner/>
         <SearchBar
+          lightTheme
           round
           icon={{name: 'search', color: 'white'}}
           placeholder=' ¿Conoces el nombre del Hotel?'

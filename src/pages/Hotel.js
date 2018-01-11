@@ -55,6 +55,7 @@ export default class Hotel extends React.Component{
             lat = {this.state.hotelsDet.latitude}
             long = {this.state.hotelsDet.longitude}
            />
+         <DescHotel description = {this.state.hotelsDet.description} />
          <InfoHotel
             people = {this.state.hotelsDet.people}
             bed = {this.state.hotelsDet.bed}
@@ -62,7 +63,7 @@ export default class Hotel extends React.Component{
             television = {this.state.hotelsDet.television}
             priceHotel = {this.state.hotelsDet.price}
          />
-          <DescHotel description = {this.state.hotelsDet.description} />
+
         </View>
       </ScrollView>
     )
