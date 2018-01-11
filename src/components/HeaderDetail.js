@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet,Image,ImageBackground,View,Text } from 'react-native';
+import { StyleSheet,Image,ImageBackground,TouchableOpacity,View,Text } from 'react-native';
 import { Rating } from 'react-native-elements';
 import ImageOverlay from '../components/ImageOverlay';
+import MapView from 'react-native-maps';
 
 export default class HeaderDetails extends React.Component<{}> {
   render() {
+    console.log(this.props);
     return (
       <View >
         <ImageBackground source= {this.props.imageHotel} style={styles.banner} >
@@ -29,7 +31,22 @@ export default class HeaderDetails extends React.Component<{}> {
               </Text>
           </View>
           <View style={styles.mapContainer}>
-            <Image  source= {this.props.imageMaps} style={styles.mapView} />
+            <MapView style={styles.map}
+                region={{
+                  latitude:this.props.lat,
+                  longitude: this.props.long,
+                  latitudeDelta: 0.0009,
+                  longitudeDelta: 0.0009,
+                }}>
+                <MapView.Marker
+                 coordinate={{
+                   latitude:this.props.lat,
+                   longitude: this.props.long,
+                  }}
+                 title="Prueba"
+                 description="Otra Prueba"
+               />
+            </MapView>
           </View>
         </View>
      </View>
@@ -61,7 +78,8 @@ const styles = StyleSheet.create({
     flexDirection:'column',
     flexWrap:'wrap',
     justifyContent:'space-around',
-    alignItems:'center',
+    alignItems:'flex-start',
+    padding:10,
   },
   textDirection: {
     fontWeight:'bold',
@@ -75,14 +93,26 @@ const styles = StyleSheet.create({
     color:'white',
   },
   mapContainer:{
-    flex:3,
-    width:'100%'
+    position:'absolute',
+    top:0,
+    left:'40%',
+    bottom:0,
+    right:0,
+    justifyContent:'flex-end',
+    alignItems:'center'
   },
   mapView:{
     width:'100%',
     alignItems:'center',
     justifyContent:'center',
     height:100,
+  },
+  map: {
+    position:'absolute',
+    top:0,
+    left:0,
+    bottom:0,
+    right:0
   },
 });
 

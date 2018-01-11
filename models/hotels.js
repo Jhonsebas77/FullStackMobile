@@ -14,6 +14,8 @@ const hotelsSchema = new Schema({
   wifi:{type:String},
   television:{type:String},
   bed:{type:Number},
+  latitude:{type:Number},
+  longitude:{type:Number},
   people:{type:Number}
 });
 

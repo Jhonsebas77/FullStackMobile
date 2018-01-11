@@ -35,6 +35,8 @@ exports.addHotels = function(req, res) {
 		wifi:	req.body.wifi,
 		bed:	req.body.bed,
 		television:	req.body.television,
+		latitude:	req.body.latitude,
+		longitude:	req.body.longitude,
 		people:	req.body.people
 	});
 
@@ -61,6 +63,8 @@ exports.updateHotels = function(req, res) {
 		hotels.description = req.body.description;
 		hotels.city = req.body.city;
 		hotels.country = req.body.country;
+		hotels.latitude =	req.body.latitude;
+		hotels.longitude =	req.body.longitude;
 
 		hotels.save(function(err) {
 			if(err) return res.send(500, err.message);

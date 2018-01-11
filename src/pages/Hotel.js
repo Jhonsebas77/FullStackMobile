@@ -37,6 +37,7 @@ export default class Hotel extends React.Component{
    }
 
   render() {
+    const { navigate } = this.props.navigation;
     if (!this.state.loaded) {
       return this.renderLoadingView();
     }
@@ -51,6 +52,8 @@ export default class Hotel extends React.Component{
             cityHotel = {this.state.hotelsDet.city}
             countryHotel = {this.state.hotelsDet.country}
             imageMaps = {{uri: this.state.hotelsDet.imageMaps}}
+            lat = {this.state.hotelsDet.latitude}
+            long = {this.state.hotelsDet.longitude}
            />
          <InfoHotel
             people = {this.state.hotelsDet.people}
