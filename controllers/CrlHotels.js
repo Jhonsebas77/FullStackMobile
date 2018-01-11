@@ -1,7 +1,15 @@
+
+/*  
+ * Proyecto: Prueba FullStackMobile.
+ * Empresa: Almundo
+ * Responsable Proyecto: Sebastian Otalora
+ * Responsable Contacto: jhonsebas77@outlook.com | 3217209516
+ */
+
 var mongoose = require('mongoose');
 var Hotels = require('../models/hotels');
 
-
+//Retorna todos los elementos de la peticion
 exports.findAllHotels = function(req, res) {
 	Hotels.find(function(err, hotels) {
     if(err) res.send(500, err.message);
@@ -10,6 +18,7 @@ exports.findAllHotels = function(req, res) {
 	});
 };
 
+//Retorna un unico elemento determinado por el :Id
 exports.findById = function(req, res) {
 	Hotels.findById(req.params.id, function(err, hotels) {
     if(err) return res.send(500, err.message);
@@ -18,10 +27,12 @@ exports.findById = function(req, res) {
 	});
 };
 
+//Permite agregar elementos a la peticion
 exports.addHotels = function(req, res) {
 	console.log('POST');
 	console.log(req.body);
 
+// Reasigna los valores
 	var hotels = new Hotels({
 		name:	req.body.name,
 		stars:	req.body.stars,
@@ -40,12 +51,14 @@ exports.addHotels = function(req, res) {
 		people:	req.body.people
 	});
 
+//Guarda los valores en la BD
 	hotels.save(function(err, hotels) {
 		if(err) return res.send(500, err.message);
     res.status(200).jsonp(hotels);
 	});
 };
 
+//Actualiza un elmento especificandole un ID
 exports.updateHotels = function(req, res) {
 	console.log('PUT');
 	console.log(req.body);
@@ -73,6 +86,7 @@ exports.updateHotels = function(req, res) {
 	});
 };
 
+//Elimina un elemento especificando su ID
 exports.deleteHotels = function(req, res) {
 	Hotels.findById(req.params.id, function(err, hotels) {
 		hotels.remove(function(err) {

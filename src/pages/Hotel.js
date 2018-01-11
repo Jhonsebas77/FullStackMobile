@@ -1,3 +1,10 @@
+/*
+ * Proyecto: Prueba FullStackMobile.
+ * Empresa: Almundo
+ * Responsable Proyecto: Sebastian Otalora
+ * Responsable Contacto: jhonsebas77@outlook.com | 3217209516
+ * Header del Hotel en especifico, recibe todas las variables del componente Hotel.js
+ */
 'use stric'
 import React, { Component } from 'react';
 import { Card,Rating,Badge,Divider,Icon } from 'react-native-elements';

@@ -1,3 +1,11 @@
+/*
+ * Proyecto: Prueba FullStackMobile.
+ * Empresa: Almundo
+ * Responsable Proyecto: Sebastian Otalora
+ * Responsable Contacto: jhonsebas77@outlook.com | 3217209516
+ * Descripcion del Hotel en especifico
+ */
+
 import React, { Component } from 'react';
 import { StyleSheet,View,Text } from 'react-native';
 import { Card } from 'react-native-elements';

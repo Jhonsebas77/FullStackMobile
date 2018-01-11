@@ -1,10 +1,11 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- * Si se usa una version mayor a la 0.5 utiliza ImageBackground en vez de
- Image si el componete imagen tiene hijos
+/*
+ * Proyecto: Prueba FullStackMobile.
+ * Empresa: Almundo
+ * Responsable Proyecto: Sebastian Otalora
+ * Responsable Contacto: jhonsebas77@outlook.com | 3217209516
+ * Componente para ubicar un texto encima de una ImageBackground
  */
+
 
 import React, { Component } from 'react';
 import {StyleSheet,Text,View} from 'react-native';

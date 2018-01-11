@@ -1,3 +1,10 @@
+/*
+ * Proyecto: Prueba FullStackMobile.
+ * Empresa: Almundo
+ * Responsable Proyecto: Sebastian Otalora
+ * Responsable Contacto: jhonsebas77@outlook.com | 3217209516
+ * Componente utilizado para crear un Loading Screen mientras el API retorna
+ */
 import React, { Component } from 'react';
 import { StyleSheet,ImageBackground,View,ActivityIndicator } from 'react-native';
 

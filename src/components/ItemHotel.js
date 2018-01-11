@@ -1,3 +1,10 @@
+/*
+ * Proyecto: Prueba FullStackMobile.
+ * Empresa: Almundo
+ * Responsable Proyecto: Sebastian Otalora
+ * Responsable Contacto: jhonsebas77@outlook.com | 3217209516
+ * Componente para ubicar en un FlatList los elementos retornados de la peticion
+ */
 import React, { Component } from 'react';
 import {StyleSheet,ImageBackground,Text,View,TouchableOpacity,Image} from 'react-native';
 import { Rating,Card } from 'react-native-elements';

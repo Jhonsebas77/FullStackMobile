@@ -1,3 +1,13 @@
+/*
+ * Proyecto: Prueba FullStackMobile.
+ * Empresa: Almundo
+ * Responsable Proyecto: Sebastian Otalora
+ * Responsable Contacto: jhonsebas77@outlook.com | 3217209516
+
+    Banner en la pantalla de inicio
+
+ */
+
 import React, { Component } from 'react';
 import {StyleSheet,ImageBackground,View,Image} from 'react-native';
 import ImageOverlay from './ImageOverlay';
@@ -27,9 +37,6 @@ const styles = StyleSheet.create({
     padding:5,
     alignItems:'center',
     backgroundColor:'#98d2c1'
-  },
-  iconContainer:{
-
   },
   icon:{
     width:140,

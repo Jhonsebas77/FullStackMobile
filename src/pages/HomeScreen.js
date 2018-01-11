@@ -1,3 +1,10 @@
+/*
+ * Proyecto: Prueba FullStackMobile.
+ * Empresa: Almundo
+ * Responsable Proyecto: Sebastian Otalora
+ * Responsable Contacto: jhonsebas77@outlook.com | 3217209516
+ * Vista principal
+ */
 import React, { Component } from 'react';
 import {ScrollView,StyleSheet,View,ActivityIndicator,Text,ImageBackground,TouchableOpacity,Image,FlatList} from 'react-native';
 import { SearchBar,Card,Header } from 'react-native-elements';
@@ -11,6 +18,8 @@ export default class HomeScreen extends React.Component<{}> {
   static navigationOptions = {
     header:false,
   };
+
+  //Asignamos las propiedades inciales para nuestro State
   constructor(props){
     super(props);
     this.state={
@@ -21,42 +30,52 @@ export default class HomeScreen extends React.Component<{}> {
       noData:false,
     }
   }
+
+  //Metodo propio de React que teniendo en cuenta el ciclo de vida se cargara antes de renderizar, permitiendo asi realizar la peticion al API
   async componentWillMount(){
     let hotels = await api();
     this.setState({hotels,loaded:true,hotelsSearch:hotels});
     console.log(hotels);
   }
+  //Metodo que retorna una vista de carga
   renderLoadingView(){
     return(
       <Loading imageLoading= {require('../img/loadHotels.png')} />
     )
   }
 
+  /*
+   * Filtro de Busqueda, recibe el Texto del SearchBar
+   * compara las dos cadenas de texto y retorna un valor
+   * con el cual podemos tomar desiciones
+   *
+   * ademas se realizan otras validaciones para permitir retornar
+   la busqueda sin afectar la lista original
+   */
   filterSearch(text){
-
     const newData = this.state.hotelsSearch.filter(function (item){
       const itemData = item.name.toUpperCase()
       const textData= text.toUpperCase()
-      console.log( itemData.indexOf(textData))
       return itemData.indexOf(textData) > -1
     })
 
-    // if no match and text is empty
+    // Si no coinciden y el texto es vacio retorne la lista original
     if (!text || text === '') {
         this.setState({
           hotelsSearch:this.state.hotels,
           text:''
         })
       }
-       // if no name matches to text output
+       // Si no coincide ningun dato retorne la lista original
        else if (!Array.isArray(newData) && !newData.length) {
-        // set no data flag to true so as to render flatlist conditionally
         this.setState({
           hotelsSearch:this.state.hotels,
           noData: true
         })
       }
-      // if name matches then display
+      // Si el nombre coincide retorna los valores necesarios y lo pasa al FlatList
+      // done mapea los datos y le asigna un indice para poderlo visualizar
+
       else if (Array.isArray(newData)) {
         this.setState({
           noData: false,

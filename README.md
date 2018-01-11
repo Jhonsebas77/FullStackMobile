@@ -96,11 +96,22 @@ El App está compuesta de la siguiente forma
 > - ./controllers/Ctrlhotels  : *Controladores para la BD*
 > - ./util/API  : *API*
 
+
 ----------
 
 ## Capturas Pantalla
 #### Pantalla de Inicio
 ![ ](./src/img/screencapture/HomeScreen.png)
 
-#### Vista Detallw
+> - Vista compuesta por un Header con el icono del App, una barra de búsqueda que permite encontrar un hotel en específico y un <kbd>FlatList</kbd> que renderiza la respuesta obtenida de nuestra API
+
+----------
+
+#### Vista Detalle
 ![ ](./src/img/screencapture/DetailHotel.png)
+> - Vista donde se visualiza la información obtenida de nuestra API al realizar la peticion GET/:id compuesta por un Header con el nombre del Hotel seleccionado y su calificación, información de la ubicación del hotel, una tarjeta con una breve descripción. y por último una tarjeta en la que se visualizan los diferentes servicios que ofrece el hotel junto al tipo de habitaciones, también se visualiza el costo de una noche en la habitacion de ese hotel
+
+----------
+
+#### Video Preview
+https://youtu.be/7X7ZxgpxRKM
